@@ -26,11 +26,13 @@
  CHANGE LOG APPEARS AT THE END OF THE FILE
  *****************************************************************************/
 
-#if !defined(_WIN32) && !defined(WIN32) && !defined(SC_USE_PTHREADS)
+#if (!defined(_WIN32) && !defined(WIN32) && !defined(SC_USE_PTHREADS)) || defined(__MINGW64__)
 
+#ifndef __MINGW64__
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/types.h>
+#endif
 
 #include "sysc/kernel/sc_cor_qt.h"
 #include "sysc/kernel/sc_simcontext.h"
@@ -63,7 +65,7 @@ sc_cor_qt::stack_protect( bool enable )
 {
     // Code needs to be tested on HP-UX and disabled if it doesn't work there
     // Code still needs to be ported to WIN32
-
+#ifndef __MINGW64__
     static std::size_t pagesize;
 
     if( pagesize == 0 ) {
@@ -107,6 +109,7 @@ sc_cor_qt::stack_protect( bool enable )
     }
 
     sc_assert( ret == 0 );
+#endif
 }
 
 

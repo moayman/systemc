@@ -158,8 +158,10 @@ AS_CASE([${TARGET_ARCH}],
     [# check CPU architecture
      AS_CASE([${target_cpu}], dnl
        [x86_64|amd64], dnl
-         [TARGET_ARCH="${TARGET_ARCH}64"
-          QT_ARCH="x86_64"
+         [AS_VAR_IF([TARGET_ARCH],[mingw],dnl
+                      [QT_ARCH="x64"],
+                      [QT_ARCH="x86_64"])
+           TARGET_ARCH="${TARGET_ARCH}64"
           CPU_ARCH="-m64"],
        [x*86|i*86], dnl
          [QT_ARCH="iX86"
@@ -177,8 +179,8 @@ AS_CASE([${TARGET_ARCH}],
        [AC_MSG_ERROR("sorry...compiler not supported")])
 
      # use WinFiber on MinGW platforms
-     AS_CASE([${TARGET_ARCH}],
-       [mingw*],[QT_ARCH="none"])
+     # AS_CASE([${TARGET_ARCH}],
+     #   [mingw*],[QT_ARCH="none"])
     ],
 
   [macosx],dnl
@@ -494,6 +496,7 @@ dnl
 AM_CONDITIONAL([QT_ARCH_X86], [ test "${QT_ARCH}" = "iX86" ])
 AM_CONDITIONAL([QT_ARCH_AARCH64], [ test "${QT_ARCH}" = "aarch64" ])
 AM_CONDITIONAL([QT_ARCH_X86_64], [ test "${QT_ARCH}" = "x86_64" ])
+AM_CONDITIONAL([QT_ARCH_X64], [ test "${QT_ARCH}" = "x64" ])
 AM_CONDITIONAL([QT_ARCH_POWERPC_MACOSX], [ test "${QT_ARCH}" = "powerpc-apple-macosx" ])
 AM_CONDITIONAL([QT_ARCH_SPARC], [ test "${QT_ARCH}" = "sparc-os2" ])
 AM_CONDITIONAL([QT_ARCH_HPPA], [ test "${QT_ARCH}" = "hppa" ])

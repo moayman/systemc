@@ -114,6 +114,28 @@ case $1 in
 		iter_bench_load=10000000
 		;;
 
+	x64*)
+		${LN_S} md/x64.s qtmds.s
+		: "MinGW 64-bit and compatibles"
+#		${LN_S} md/null.c qtmdc.c
+		iter_init=10000000
+		iter_runone=1000000
+		iter_blockint=1000000
+		iter_blockfloat=1000000
+		iter_vainit0=1000000
+		iter_vainit2=1000000
+		iter_vainit4=1000000
+		iter_vainit8=1000000
+		iter_vastart0=1000000
+		iter_vastart2=1000000
+		iter_vastart4=1000000
+		iter_vastart8=1000000
+		iter_bench_call_reg=1000000
+		iter_bench_call_imm=1000000
+		iter_bench_add=100000000
+		iter_bench_load=10000000
+		;;
+
     iX86*)
         case $1 in
             iX86-ss*)

@@ -2,6 +2,8 @@
 #include "sysc/packages/qt/md/sparc.h"
 #elif defined( __hppa )
 #include "sysc/packages/qt/md/hppa.h"
+#elif defined( __MINGW64__ )
+#include "sysc/packages/qt/md/x64.h"
 #elif defined( __x86_64__ )
 #include "sysc/packages/qt/md/iX86_64.h"
 #elif defined( __i386 )

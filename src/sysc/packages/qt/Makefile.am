@@ -44,6 +44,7 @@ NO_H_FILES = \
 	md/hppa.h \
 	md/i386.h \
 	md/iX86_64.h \
+	md/x64.h \
 	md/ksr1.h \
 	md/m88k.h \
 	md/mips.h \
@@ -73,6 +74,7 @@ NO_S_FILES = \
 	md/i386_b.s \
 	md/i386.s \
 	md/iX86_64.s \
+	md/x64.s \
 	md/ksr1_b.s \
 	md/ksr1.s \
 	md/m88k_b.s \
@@ -166,6 +168,9 @@ QT_ARCH_IMPL = md/i386.s
 endif
 if QT_ARCH_X86_64
 QT_ARCH_IMPL = md/iX86_64.s
+endif
+if QT_ARCH_X64
+QT_ARCH_IMPL = md/x64.s
 endif
 if QT_ARCH_POWERPC_MACOSX
 QT_ARCH_FILES+=qtmdc.c

@@ -30,7 +30,7 @@
 #ifndef SC_COR_FIBER_H
 #define SC_COR_FIBER_H
 
-#if defined(_WIN32) || defined(WIN32) || defined(WIN64)
+#if (defined(_WIN32) || defined(WIN32) || defined(WIN64)) && !defined(__MINGW64__)
 
 #include "sysc/kernel/sc_cor.h"
 #include "sysc/kernel/sc_cmnhdr.h"

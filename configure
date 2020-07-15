@@ -659,6 +659,8 @@ QT_ARCH_POWERPC_MACOSX_FALSE
 QT_ARCH_POWERPC_MACOSX_TRUE
 QT_ARCH_X86_64_FALSE
 QT_ARCH_X86_64_TRUE
+QT_ARCH_X64_FALSE
+QT_ARCH_X64_TRUE
 QT_ARCH_AARCH64_FALSE
 QT_ARCH_AARCH64_TRUE
 QT_ARCH_X86_FALSE
@@ -5061,8 +5063,12 @@ case ${TARGET_ARCH} in #(
         # check CPU architecture
      case ${target_cpu} in #(
          x86_64|amd64) :
-             TARGET_ARCH="${TARGET_ARCH}64"
-          QT_ARCH="x86_64"
+          if test "x$TARGET_ARCH" = xmingw; then :
+                    QT_ARCH="x64"
+          else
+                    QT_ARCH="x86_64"
+          fi
+          TARGET_ARCH="${TARGET_ARCH}64"
           CPU_ARCH="-m64" ;; #(
   x*86|i*86) :
              QT_ARCH="iX86"
@@ -5084,12 +5090,12 @@ else
 fi
 
      # use WinFiber on MinGW platforms
-     case ${TARGET_ARCH} in #(
-  mingw*) :
-    QT_ARCH="none" ;; #(
-  *) :
-     ;;
-esac
+#     case ${TARGET_ARCH} in #(
+#  mingw*) :
+#    QT_ARCH="none" ;; #(
+#  *) :
+#     ;;
+#esac
      ;; #(
   macosx) :
         LDFLAG_RPATH="-Wl,-rpath -Wl,"
@@ -16625,6 +16631,14 @@ else
   QT_ARCH_X86_64_FALSE=
 fi
 
+ if  test "${QT_ARCH}" = "x64" ; then
+  QT_ARCH_X64_TRUE=
+  QT_ARCH_X64_FALSE='#'
+else
+  QT_ARCH_X64_TRUE='#'
+  QT_ARCH_X64_FALSE=
+fi
+
  if  test "${QT_ARCH}" = "powerpc-apple-macosx" ; then
   QT_ARCH_POWERPC_MACOSX_TRUE=
   QT_ARCH_POWERPC_MACOSX_FALSE='#'
@@ -17023,6 +17037,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${QT_ARCH_X86_64_TRUE}" && test -z "${QT_ARCH_X86_64_FALSE}"; then
   as_fn_error $? "conditional \"QT_ARCH_X86_64\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${QT_ARCH_X64_TRUE}" && test -z "${QT_ARCH_X64_FALSE}"; then
+  as_fn_error $? "conditional \"QT_ARCH_X64\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${QT_ARCH_POWERPC_MACOSX_TRUE}" && test -z "${QT_ARCH_POWERPC_MACOSX_FALSE}"; then

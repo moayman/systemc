@@ -26,7 +26,7 @@
  CHANGE LOG APPEARS AT THE END OF THE FILE
  *****************************************************************************/
 
-#if defined(_WIN32) || defined(WIN32) || defined(WIN64)
+#if (defined(_WIN32) || defined(WIN32) || defined(WIN64)) && !defined(__MINGW64__)
 
 #ifndef SC_INCLUDE_WINDOWS_H
 #  define SC_INCLUDE_WINDOWS_H // include Windows.h, if needed
